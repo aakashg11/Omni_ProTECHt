@@ -34,6 +34,17 @@ const revealObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.reveal').forEach((element) => revealObserver.observe(element));
 
+const servicePointObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('points-visible');
+      servicePointObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.32 });
+
+document.querySelectorAll('[data-service-card]').forEach((card) => servicePointObserver.observe(card));
+
 const watchSection = document.querySelector('[data-watch-section]');
 const watchLabel = document.querySelector('[data-watch-label]');
 
